@@ -2,8 +2,9 @@ Vue.config.devtools = true;
 var app   = new Vue ({
     el: '#root',
     data: {
+        diskActive: 0,
         index: 0,
-        timeRange: 90,
+        timeRange: 0,
         volumeRange: 20,
         disks: [
             {
@@ -17,19 +18,28 @@ var app   = new Vue ({
             this.disks = (response.data.response);
         });
     },
+    created() {
+        setInterval(() => {
+            this.timeRange = this.timeRange + 1;
+        }, 1000);
+    },
     methods: {
         next() {
-            if(this.index < this.disks.length - 1) {
-                this.index++;
+            this.timeRange = 0;
+            // this.diskActive = this.diskActive + 1;
+            if(this.diskActive < this.disks.length - 1) {
+                this.diskActive++;
             } else {
-                this.index = 0;
+                this.diskActive = 0;
             }
         },
         prev() {
-            if(this.index > 0) {
-                this.index--;
+            // this.diskActive = this.diskActive - 1;
+            this.timeRange = 0;
+            if(this.diskActive < this.disks.length - 1) {
+                this.diskActive++;
             } else {
-                this.index = this.disks.length - 1;
+                this.diskActive = 0;
             }
         },
     }
