@@ -18,12 +18,48 @@
     <title>Dischi</title>
 </head>
 <body>
-    <div id="root">        
-        <div class="card-container">
+    <div id="root">
+        <div class="container">
+            <div class="card-container" v-for="disk in disks">
+                <div class="mobile-hour">
+                    <span>9:41</span>
+                    <span>
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </span>
+                </div>
+                <img class="card-image" src="album-1.jpg" alt="">
+                <div class="card-song">
+                    <span class="title"> {{disk.title}} </span>
+                    <span class="artist"> {{disk.artist}} </span>
+                </div>
+                <div class="card-ui">
+                    <input type="range" min="1" max="100" v-model="timeRange"class="time-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${timeRange}%, rgba(255, 255, 255, 0.30) ${timeRange}%)`">
+                    <div></div>
+    
+                    <div class="ui-buttons">
+                        <i class="fas fa-backward"></i>
+                        <i class="fas fa-play"></i>
+                        <i class="fas fa-forward"></i>
+                    </div>
+    
+                    <input type="range" min="1" max="100" v-model="volumeRange"class="volume-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${volumeRange}%, rgba(255, 255, 255, 0.30) ${volumeRange}%)`">
+    
+                    <div class="card-info">
+                        <span class="genre"> {{disk.genre}} </span>
+                        <span class="year"> {{disk.year}} </span>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="card-background"></div>
             
-        </div>
+        </div>        
+        
     </div>
 
+    <!-- <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>
