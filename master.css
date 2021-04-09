@@ -133,3 +133,7 @@ input.volume-slider[type=range]::-webkit-slider-thumb {
 .filters select {
     color: black;
 }
+
+.btn {
+    color: black;
+}

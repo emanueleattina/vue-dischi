@@ -10,6 +10,7 @@ var app   = new Vue ({
         timeRange: 0,
         volumeRange: 20,
         pausePlay: false,
+        arrow: '', 
         disks: [
             {
 
@@ -66,6 +67,9 @@ var app   = new Vue ({
         },
         pausePlayer() {
             this.pausePlay = !this.pausePlay;
+        },
+        sortYear() {
+            this.disks.sort((a, b) => a.year < b.year ? 1 : -1);
         }
     }
 });
