@@ -21,7 +21,7 @@
     <div id="root">
         <div class="container">
             <div class="card-container"
-            v-for="(disk, index) in disks"
+            v-for="(disk, index) in filteredDisks"
             v-if="index == diskActive">
                 <div class="mobile-hour">
                     <span>9:41</span>
@@ -37,16 +37,21 @@
                     <span class="artist"> {{disk.author}} </span>
                 </div>
                 <div class="card-ui">
-                    <input type="range" min="0" max="100" v-model="timeRange"class="time-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${timeRange}%, rgba(255, 255, 255, 0.30) ${timeRange}%)`">
+                    <input type="range" min="0" max="100" v-model="timeRange" class="time-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${timeRange}%, rgba(255, 255, 255, 0.30) ${timeRange}%)`">
                     <div></div>
     
                     <div class="ui-buttons">
                         <i @click="prev" class="fas fa-backward"></i>
-                        <i class="fas fa-play"></i>
+                        <i v-if="pausePlay == true" 
+                        @click="pausePlayer" 
+                        class="fas fa-pause"></i>
+                        <i v-if="pausePlay == false" 
+                        @click="startPlayer" 
+                        class="fas fa-play"></i>
                         <i @click="next" class="fas fa-forward"></i>
                     </div>
     
-                    <input type="range" min="1" max="100" v-model="volumeRange"class="volume-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${volumeRange}%, rgba(255, 255, 255, 0.30) ${volumeRange}%)`">
+                    <input type="range" min="1" max="100" v-model="volumeRange" class="volume-slider" :style="`background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) ${volumeRange}%, rgba(255, 255, 255, 0.30) ${volumeRange}%)`">
     
                     <div class="card-info">
                         <span class="genre"> {{disk.genre}} </span>
@@ -56,9 +61,11 @@
 
                 <div class="filters">
                     <select v-model="selectedGenre">
-                        <option v-for="(disk, i) in disks" :value="disk.genre"
-                        v-if="">{{ disk.genre }}</option>
+                        <option value="">Seleziona</option>
+                        <option v-for="(disk, i) in disks"
+                        :value="disk.genre">{{ disk.genre }}</option>
                     </select>
+                    <span> {{ selectedGenre }} </span>
                 </div>
     
             </div>
