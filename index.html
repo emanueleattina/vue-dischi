@@ -53,6 +53,13 @@
                         <span class="year"> {{disk.year}} </span>
                     </div>
                 </div>
+
+                <div class="filters">
+                    <select v-model="selectedGenre">
+                        <option v-for="(disk, i) in disks" :value="disk.genre"
+                        v-if="">{{ disk.genre }}</option>
+                    </select>
+                </div>
     
             </div>
             <!-- <div class="card-background"></div> -->

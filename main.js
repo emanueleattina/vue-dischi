@@ -1,8 +1,10 @@
 Vue.config.devtools = true;
+
 var app   = new Vue ({
     el: '#root',
     data: {
         diskActive: 0,
+        selectedGenre: '',
         index: 0,
         timeRange: 0,
         volumeRange: 20,
@@ -26,7 +28,6 @@ var app   = new Vue ({
     methods: {
         next() {
             this.timeRange = 0;
-            // this.diskActive = this.diskActive + 1;
             if(this.diskActive < this.disks.length - 1) {
                 this.diskActive++;
             } else {
@@ -34,12 +35,11 @@ var app   = new Vue ({
             }
         },
         prev() {
-            // this.diskActive = this.diskActive - 1;
             this.timeRange = 0;
-            if(this.diskActive < this.disks.length - 1) {
-                this.diskActive++;
+            if(this.diskActive > 0) {
+                this.diskActive--;
             } else {
-                this.diskActive = 0;
+                this.diskActive = this.disks.length - 1;
             }
         },
     }
